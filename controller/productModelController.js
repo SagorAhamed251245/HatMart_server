@@ -1,4 +1,4 @@
-const ProductModel = require("../model/productModel");
+const ProductModel = require("../model/productModel.js");
 
 const addProduct = async (req, res) => {
   try {
@@ -17,20 +17,7 @@ const addProduct = async (req, res) => {
       unit,
     } = req.body;
 
-    const product = await new ProductModel({
-      title,
-      details,
-      packagingDelivery,
-      warnings,
-      price,
-      category,
-      sub_category,
-      image,
-      images,
-      stock,
-      discount_percent,
-      unit,
-    }).save();
+    const product = await new ProductModel(req.body).save();
     res.status(201).send({
       success: true,
       message: "new product created",

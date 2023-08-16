@@ -1,7 +1,7 @@
 const {
   addProduct,
   getAllProducts,
-} = require("../controller/productModelController");
+} = require("../controller/productModelController.js");
 
 const express = require("express");
 
