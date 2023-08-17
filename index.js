@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
+const morgan = require('morgan')
 
 mongoose
   .connect(process.env.URL)
@@ -14,6 +15,7 @@ mongoose
 // middleware
 app.use(cors());
 app.use(express.json());
+app.use(morgan('dev'))
 
 // route
 app.get("/", (req, res) => {
