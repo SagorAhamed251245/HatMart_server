@@ -1,5 +1,7 @@
 const productRoutes = require("./routes/productRoutes.js");
 const categoriesRoutes = require("./routes/categoriesRoutes.js");
+const usersRoutes = require("./routes/usersRoutes.js")
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -24,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", productRoutes);
 app.use("/api/v1/auth", categoriesRoutes);
+app.use("/api/v1/auth", usersRoutes);
 
 // server listen
 const PORT = process.env.PORT || 5000;
