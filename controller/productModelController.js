@@ -1,4 +1,4 @@
-const ProductModel = require("../model/productModel.js");
+const productModel = require("../model/productModel.js");
 
 const addProduct = async (req, res) => {
   try {
@@ -39,7 +39,24 @@ const getAllProducts = async (req, res) => {
     res.status(500).send("An error occurred while fetching the products.");
   }
 };
+
+const getProductsBySearch = async (req, res) => {
+  const text = req.params.text;
+  try {
+    const products = await productModel
+      .find(
+        { $text: { $search: text } },
+        { score: { $meta: "textScore" } } // Add textScore to sort by relevance
+      )
+      .sort({ score: { $meta: "textScore" } }); // Sort by relevance
+    res.send(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while fetching the products.");
+  }
+};
 module.exports = {
   addProduct,
   getAllProducts,
+  getProductsBySearch,
 };
