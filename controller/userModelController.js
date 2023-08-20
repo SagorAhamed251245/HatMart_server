@@ -1,18 +1,31 @@
-const usersModel = require("../model/usersModel");
+const usersModel = require("../model/usersModel.js");
 
 // create a users
 const createUser = async (req, res) => {
-  try {
-    const user = await new usersModel(req.body).save();
-    res.status(201).send({
-      success: true,
-      message: "new user created",
-      user,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while creating user.");
+  console.log(req.body);
+
+  const { email, name , password} = req.body;
+
+  let user = await usersModel.findOne({ email });
+  if (!user) {
+    user = await new usersModel({
+      name,
+      email,
+      password
+    }).save();
   }
+  console.log(user._id);
+
+  res.status(200).send({
+    success: true,
+    message: "Loging successfully",
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      password: user.password
+    },
+  });
 };
 
 // get all users
