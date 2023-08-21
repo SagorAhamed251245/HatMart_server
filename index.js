@@ -10,10 +10,17 @@ const cors = require("cors");
 require("dotenv").config();
 const morgan = require("morgan");
 
-mongoose
-  .connect(process.env.URL)
-  .then(() => console.log("database connected.."))
-  .catch((err) => console.log(err));
+try{
+    mongoose
+      .connect(process.env.URL)
+      .then(() => console.log("database connected.."))
+      .catch((err) => console.log(err));
+}catch(err){
+
+    console.log(err)
+
+}
+
 
 // middleware
 app.use(cors());

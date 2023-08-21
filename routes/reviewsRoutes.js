@@ -1,11 +1,11 @@
 const express = require("express");
+const router = express.Router();
 const {
   createReview,
   getAllReview,
   getSingleProductsReview,
   getSingleUserReview,
 } = require("../controller/reviewsModelController");
-const router = express.Router();
 
 router.post("/reviews", createReview);
 router.get("/reviews", getAllReview);
