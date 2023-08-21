@@ -1,6 +1,7 @@
 const productRoutes = require("./routes/productRoutes.js");
 const categoriesRoutes = require("./routes/categoriesRoutes.js");
 const usersRoutes = require("./routes/usersRoutes.js")
+const reviewsRoutes = require("./routes/reviewsRoutes.js")
 
 const express = require("express");
 const app = express();
