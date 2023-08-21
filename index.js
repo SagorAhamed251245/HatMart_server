@@ -1,13 +1,13 @@
 const productRoutes = require("./routes/productRoutes.js");
 const categoriesRoutes = require("./routes/categoriesRoutes.js");
-const usersRoutes = require("./routes/usersRoutes.js")
+const usersRoutes = require("./routes/usersRoutes.js");
 
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const morgan = require('morgan')
+const morgan = require("morgan");
 
 mongoose
   .connect(process.env.URL)
@@ -17,7 +17,7 @@ mongoose
 // middleware
 app.use(cors());
 app.use(express.json());
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 
 // route
 app.get("/", (req, res) => {
