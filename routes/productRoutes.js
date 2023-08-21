@@ -1,7 +1,8 @@
 const {
   addProduct,
   getAllProducts,
-  getProductsBySearch 
+  getProductsBySearch,
+  getProductById
 } = require("../controller/productModelController.js");
 
 const express = require("express");
@@ -10,7 +11,7 @@ const router = express.Router();
 
 router.post("/product", addProduct);
 router.get("/product", getAllProducts);
-router.get("/product", getAllProducts);
-router.get("/product/:text", getProductsBySearch )
+router.get("/product/:id", getProductById)
+router.get("/product/:text", getProductsBySearch);
 
 module.exports = router;

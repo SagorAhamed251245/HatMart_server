@@ -17,7 +17,7 @@ const addProduct = async (req, res) => {
       unit,
     } = req.body;
 
-    const product = await new ProductModel(req.body).save();
+    const product = await new productModel(req.body).save();
     res.status(201).send({
       success: true,
       message: "new product created",
@@ -31,7 +31,7 @@ const addProduct = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
   try {
-    const products = await ProductModel.find();
+    const products = await productModel.find();
 
     res.send(products); // Use 'products' instead of 'randomProducts'
   } catch (error) {
@@ -55,8 +55,20 @@ const getProductsBySearch = async (req, res) => {
     res.status(500).send("An error occurred while fetching the products.");
   }
 };
+
+const getProductById = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const product = await productModel.findById({ _id: id });
+    res.send(product);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while fetching the products.");
+  }
+};
 module.exports = {
   addProduct,
   getAllProducts,
   getProductsBySearch,
+  getProductById
 };
