@@ -2,21 +2,6 @@ const productModel = require("../model/productModel.js");
 
 const addProduct = async (req, res) => {
   try {
-    const {
-      title,
-      details,
-      packagingDelivery,
-      warnings,
-      price,
-      category,
-      sub_category,
-      image,
-      images,
-      stock,
-      discount_percent,
-      unit,
-    } = req.body;
-
     const product = await new productModel(req.body).save();
     res.status(201).send({
       success: true,
@@ -70,5 +55,5 @@ module.exports = {
   addProduct,
   getAllProducts,
   getProductsBySearch,
-  getProductById
+  getProductById,
 };
