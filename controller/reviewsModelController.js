@@ -19,7 +19,7 @@ const createReview = async (req, res) => {
 const getSingleProductsReview = async (req, res) => {
   try {
     const productId = req.params.productId;
-    const productReviews = await reviewsModel.findOne({
+    const productReviews = await reviewsModel.find({
       productId: productId,
     });
     res.status(201).send({
