@@ -4,14 +4,14 @@ const usersModel = require("../model/usersModel.js");
 const createUser = async (req, res) => {
   console.log(req.body);
 
-  const { email, name , password} = req.body;
+  const { email, name, password } = req.body;
 
   let user = await usersModel.findOne({ email });
   if (!user) {
     user = await new usersModel({
       name,
       email,
-      password
+      password,
     }).save();
   }
   console.log(user._id);
@@ -23,7 +23,7 @@ const createUser = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
-      password: user.password
+      password: user.password,
     },
   });
 };
@@ -42,12 +42,20 @@ const getAllUser = async (req, res) => {
 // get a user by Email
 const getSingleUser = async (req, res) => {
   try {
-    const userEmail = req.body.email;
+    const userEmail = req.params.email;
+    console.log(userEmail);
+
+    // Assuming you have imported the 'usersModel' properly
     const user = await usersModel.findOne({ email: userEmail });
-    res.status(201).send(user);
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    res.status(200).json(user); // 200 OK response with JSON
   } catch (error) {
     console.error(error);
-    res.status(500).send("An error occurred while get a user.");
+    res.status(500).send("An error occurred while fetching a user.");
   }
 };
 

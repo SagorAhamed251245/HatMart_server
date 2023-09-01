@@ -4,7 +4,7 @@ const productSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true, // It should be 'required', not 'require'
+      required: true,
       index: true,
       lowercase: true,
     },
@@ -64,8 +64,8 @@ const productSchema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-); // You missed the curly braces for timestamps
+);
 
 productSchema.index({ title: "text", category: "text" });
 
-module.exports = mongoose.model("Product", productSchema); // Use singular "Product" for the collection name
+module.exports = mongoose.model("Product", productSchema);

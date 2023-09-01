@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema(
   {
@@ -14,6 +14,21 @@ const userSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+    image: {
+      type: "String",
+    },
+
+    mobileNumber: {
+      type: "Number",
+    },
+    gender: {
+      type: "String",
+    },
+    status: {
+      type: "String",
+      default: "active",
+    },
+
     role: {
       type: String,
       default: "user",
