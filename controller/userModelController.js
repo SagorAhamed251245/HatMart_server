@@ -8,11 +8,7 @@ const createUser = async (req, res) => {
 
   let user = await usersModel.findOne({ email });
   if (!user) {
-    user = await new usersModel({
-      name,
-      email,
-      password,
-    }).save();
+    user = await new usersModel(req.body).save();
   }
   console.log(user._id);
 
