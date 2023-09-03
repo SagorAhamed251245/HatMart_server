@@ -37,6 +37,7 @@ const productSchema = new mongoose.Schema(
       default: [],
       require: true,
     },
+
     brand: {
       type: String,
     },
@@ -62,7 +63,17 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    stock_quantity: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     viewCount: {
+      type: Number,
+      default: 0,
+    },
+
+    estimateSells: {
       type: Number,
       default: 0,
     },
