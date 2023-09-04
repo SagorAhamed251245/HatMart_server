@@ -57,7 +57,8 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     discount_percent: {
-      type: String,
+      type: Number,
+      default: 0,
     },
     unit: {
       type: String,

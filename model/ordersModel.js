@@ -30,13 +30,14 @@ const ordersSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+
     price: {
       type: Number,
       required: true,
     },
     orderStatus: {
       type: String,
-      required: true,
+      default: "Pending",
     },
   },
   { timestamps: true }
