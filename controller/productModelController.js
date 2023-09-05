@@ -42,7 +42,15 @@ const getProductsBySearch = async (req, res) => {
   const text = req.params.text;
   try {
     const products = await productModel
-      .find({ $text: { $search: text } }, { score: { $meta: "textScore" } })
+      .find(
+        {
+          $or: [
+            { $text: { $search: text } },
+            { sub_category: { $in: [text] } },
+          ],
+        },
+        { score: { $meta: "textScore" } }
+      )
       .sort({ score: { $meta: "textScore" } });
     res.send(products);
   } catch (error) {
