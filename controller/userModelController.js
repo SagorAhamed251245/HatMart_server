@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const usersModel = require("../model/usersModel.js");
 
 // create a users
@@ -35,24 +36,59 @@ const getAllUser = async (req, res) => {
   }
 };
 
-// get a user by Email
 const getSingleUser = async (req, res) => {
   try {
     const userEmail = req.params.email;
     console.log(userEmail);
 
-    // Assuming you have imported the 'usersModel' properly
     const user = await usersModel.findOne({ email: userEmail });
 
     if (!user) {
       return res.status(404).send("User not found");
     }
 
-    res.status(200).json(user); // 200 OK response with JSON
+    res.status(200).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while fetching a user.");
   }
 };
 
-module.exports = { createUser, getSingleUser, getAllUser };
+const editUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid user ID",
+      });
+    }
+
+    const user = await usersModel.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User successfully updated",
+      user,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while updating the user.",
+    });
+  }
+};
+
+module.exports = { createUser, getSingleUser, getAllUser, editUser };
