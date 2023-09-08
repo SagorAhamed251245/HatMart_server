@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
@@ -21,8 +21,16 @@ const userSchema = new mongoose.Schema(
     mobileNumber: {
       type: "Number",
     },
+
+    address: {
+      type: String,
+    },
+
     gender: {
       type: "String",
+    },
+    dateOfBirth: {
+      type: Date,
     },
     status: {
       type: "String",
