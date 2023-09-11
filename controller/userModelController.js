@@ -39,7 +39,11 @@ const getAllUser = async (req, res) => {
 const getSingleUser = async (req, res) => {
   try {
     const userEmail = req.params.email;
-    console.log(userEmail);
+
+    // Validate the email address format (optional)
+    if (!isValidEmail(userEmail)) {
+      return res.status(400).send("Invalid email address");
+    }
 
     const user = await usersModel.findOne({ email: userEmail });
 
@@ -53,6 +57,12 @@ const getSingleUser = async (req, res) => {
     res.status(500).send("An error occurred while fetching a user.");
   }
 };
+
+// Function to validate email address format (optional)
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 const editUser = async (req, res) => {
   try {
