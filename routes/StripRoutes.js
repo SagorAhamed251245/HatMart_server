@@ -1,6 +1,5 @@
 const express = require("express");
-
-const { checkoutSession } = require("../controller/stripPaymentControler");
+const { checkoutSession } = require("../controller/stripPaymentControlar.js");
 
 const router = express.Router();
 
