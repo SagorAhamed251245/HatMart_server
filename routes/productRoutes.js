@@ -4,6 +4,7 @@ const {
   getProductsBySearch,
   getProductById,
   addMultiProduct,
+  updateProduct,
 } = require("../controller/productModelController.js");
 
 const express = require("express");
@@ -14,5 +15,6 @@ router.post("/multiProduct", addMultiProduct);
 router.get("/product", getAllProducts);
 router.get("/productId/:id", getProductById);
 router.get("/productSearch/:text", getProductsBySearch);
+router.patch("/updateProduct/:id", updateProduct);
 
 module.exports = router;

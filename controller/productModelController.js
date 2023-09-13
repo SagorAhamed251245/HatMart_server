@@ -79,10 +79,26 @@ const getProductById = async (req, res) => {
     res.status(500).send("An error occurred while fetching the products.");
   }
 };
+const updateProduct = async (req, res) => {
+  try {
+    const query = req.params.id;
+    const body = req.body;
+    const updatedProduct = await productModel.updateOne({ _id: query }, body);
+    res.status(201).send({
+      success: true,
+      message: "product updated successfully",
+      updatedProduct,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while updated the product.");
+  }
+};
 module.exports = {
   addProduct,
   getAllProducts,
   getProductsBySearch,
   getProductById,
   addMultiProduct,
+  updateProduct,
 };

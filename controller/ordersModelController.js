@@ -49,5 +49,23 @@ const getOrderByCustomerId = async (req, res) => {
     res.status(500).send("An error occurred while get all order.");
   }
 };
+const getOrderByTransactionId = async (req, res) => {
+  try {
+    const transactionId = req.params.transactionId;
+    const orders = await ordersModel.find({ transactionId: transactionId });
+    res.status(201).send(orders);
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send("An error occurred while get all order by transactionId.");
+  }
+};
 
-module.exports = { addOrder, getAllOrder, getOrderByCustomerId, addMultiOrder };
+module.exports = {
+  addOrder,
+  getAllOrder,
+  getOrderByCustomerId,
+  addMultiOrder,
+  getOrderByTransactionId,
+};
