@@ -6,10 +6,6 @@ const transactionsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    orderId: {
-      type: String,
-      required: true,
-    },
     userId: {
       type: String,
       required: true,
@@ -23,12 +19,8 @@ const transactionsSchema = new mongoose.Schema(
       type: String,
       default: "approved",
     },
-    deliveryCharge: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    price: {
+
+    totalPrice: {
       type: Number,
       required: true,
     },
