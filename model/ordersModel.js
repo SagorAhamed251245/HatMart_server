@@ -6,6 +6,15 @@ const ordersSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    transactionId: {
+      type: String,
+      required: true,
+    },
+    paymentMethod: {
+      type: String,
+      required: true,
+    },
+
     customerId: {
       type: String,
       required: true,
@@ -30,13 +39,22 @@ const ordersSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    quantity: {
+      type: Number,
+      default: 1,
+    },
+
     price: {
       type: Number,
       required: true,
     },
     orderStatus: {
       type: String,
-      required: true,
+      default: "Pending",
+    },
+    paymentStatus: {
+      type: String,
+      default: "Pending",
     },
   },
   { timestamps: true }

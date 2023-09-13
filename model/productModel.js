@@ -35,7 +35,9 @@ const productSchema = new mongoose.Schema(
     sub_category: {
       type: [String],
       default: [],
-      require: true,
+      required: true,
+      index: true, // Changed 'multi' to 'name'
+      lowercase: true,
     },
 
     brand: {
@@ -57,7 +59,8 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     discount_percent: {
-      type: String,
+      type: Number,
+      default: 0,
     },
     unit: {
       type: String,
@@ -81,6 +84,10 @@ const productSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-productSchema.index({ title: "text", category: "text" });
+productSchema.index({
+  title: "text",
+  category: "text",
+  sub_category: "text", // Changed 'multi' to 'name'
+});
 
 module.exports = mongoose.model("Product", productSchema);
