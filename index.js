@@ -37,6 +37,10 @@ app.use("/api/v1/auth", usersRoutes);
 app.use("/api/v1/auth", reviewsRoutes);
 app.use("/api/v1/auth", bannerRoutes);
 app.use("/api/v1/auth", ordersRoutes);
+app.use("/api/v1/auth", transactionRoutes);
+app.use("/api/v1/auth", cartPaymentRoutes);
+app.use("/api/v1/auth", wishListRoutes);
+app.use("/api/v1/auth", couponRoutes);
 
 // server listen
 const PORT = process.env.PORT || 5000;
