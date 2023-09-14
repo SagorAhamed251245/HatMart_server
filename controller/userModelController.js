@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const usersModel = require("../model/usersModel.js");
+const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
 // create a users
 const createUser = async (req, res) => {
@@ -12,7 +14,22 @@ const createUser = async (req, res) => {
     user = await new usersModel(req.body).save();
   }
   console.log(user._id);
+  // Create a JWT token with the "role" claim
+  const token = jwt.sign(
+    { _id: user._id, role: user.role },
+    process.env.JWT_KEY,
+    {
+      expiresIn: "1h",
+    }
+  );
 
+  const jwtCookie = cookie.serialize("jwtToken", token, {
+    httpOnly: true,
+    maxAge: 360000,
+    sameSite: "strict",
+  });
+
+  res.setHeader("Set-Cookie", jwtCookie);
   res.status(200).send({
     success: true,
     message: "Loging successfully",
@@ -62,7 +79,6 @@ const getSingleUserById = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    // Validate the email address format (optional)
     if (!isValidEmail(userEmail)) {
       return res.status(400).send("Invalid userId");
     }
@@ -79,7 +95,7 @@ const getSingleUserById = async (req, res) => {
     res.status(500).send("An error occurred while fetching a user.");
   }
 };
-// Function to validate email address format (optional)
+
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

@@ -5,6 +5,7 @@ const {
   getSingleUser,
   editUser,
 } = require("../controller/userModelController");
+const verifyAdmin = require("../middleware/verifyAdmin");
 const router = express.Router();
 
 router.post("/users", createUser);
