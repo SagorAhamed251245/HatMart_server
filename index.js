@@ -4,6 +4,9 @@ const usersRoutes = require("./routes/usersRoutes.js");
 const reviewsRoutes = require("./routes/reviewsRoutes.js");
 const bannerRoutes = require("./routes/bannersRoutes.js");
 const ordersRoutes = require("./routes/ordersRoutes.js");
+const transactionRoutes = require("./routes/transactionRoutes.js");
+const cartPaymentRoutes = require("./routes/StripRoutes.js");
+const wishListRoutes = require("./routes/wishListRoutes.js");
 const couponRoutes = require("./routes/couponRoutes.js");
 
 const express = require("express");
@@ -34,7 +37,6 @@ app.use("/api/v1/auth", usersRoutes);
 app.use("/api/v1/auth", reviewsRoutes);
 app.use("/api/v1/auth", bannerRoutes);
 app.use("/api/v1/auth", ordersRoutes);
-app.use("/api/v1/auth", couponRoutes);
 
 // server listen
 const PORT = process.env.PORT || 5000;
