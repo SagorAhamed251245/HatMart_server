@@ -5,12 +5,7 @@ const wishListSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    productId: {
-      userId: {
-        type: String,
-        require: true,
-      },
-    },
+    productId: { type: String, require: true },
   },
   { timestamps: true }
 );
