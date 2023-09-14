@@ -58,6 +58,27 @@ const getSingleUser = async (req, res) => {
   }
 };
 
+const getSingleUserById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Validate the email address format (optional)
+    if (!isValidEmail(userEmail)) {
+      return res.status(400).send("Invalid userId");
+    }
+
+    const user = await usersModel.findOne({ _id: userId });
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while fetching a user.");
+  }
+};
 // Function to validate email address format (optional)
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -101,4 +122,10 @@ const editUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getSingleUser, getAllUser, editUser };
+module.exports = {
+  createUser,
+  getSingleUser,
+  getAllUser,
+  editUser,
+  getSingleUserById,
+};
