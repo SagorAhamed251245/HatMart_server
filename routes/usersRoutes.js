@@ -11,5 +11,6 @@ router.post("/users", createUser);
 router.get("/users", getAllUser);
 router.get("/user/:email", getSingleUser);
 router.patch("/updateUser/:id", editUser);
+router.get("/userId/:id", editUser);
 
 module.exports = router;

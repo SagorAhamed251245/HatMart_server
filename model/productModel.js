@@ -71,6 +71,10 @@ const productSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
+    isEocFriendly: {
+      type: Boolean,
+      default: false,
+    },
     viewCount: {
       type: Number,
       default: 0,
