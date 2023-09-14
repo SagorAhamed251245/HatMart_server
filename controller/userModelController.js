@@ -138,10 +138,41 @@ const editUser = async (req, res) => {
   }
 };
 
+// edit user role
+const changeUserRole = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userRole = req.body.role;
+    console.log(id, userRole);
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid user ID",
+      });
+    }
+
+    await usersModel.findByIdAndUpdate(id, {
+      $set: { role: userRole },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: `User role successfully updated to ${role}`,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while updating the user role.",
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getSingleUser,
   getAllUser,
   editUser,
   getSingleUserById,
+  changeUserRole,
 };
