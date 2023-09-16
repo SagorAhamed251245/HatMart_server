@@ -9,9 +9,8 @@ const couponSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
-      index: true,
     },
-    perchantage: {
+    percentage: {
       type: Number,
       required: true,
     },
@@ -19,5 +18,4 @@ const couponSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-couponSchema.index({ type: "type" });
 module.exports = mongoose.model("Coupon", couponSchema);
