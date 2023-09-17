@@ -22,6 +22,20 @@ const productSchema = new mongoose.Schema(
         required: true,
       },
     },
+    isLocal: {
+      type: "boolean",
+      default: false,
+    },
+    city: {
+      name: {
+        type: "String",
+        default: "Location is not available",
+      },
+      districts: {
+        type: ["String"],
+        default: [],
+      },
+    },
     price: {
       type: Number,
       required: true,
