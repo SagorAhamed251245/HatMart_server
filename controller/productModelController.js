@@ -47,6 +47,8 @@ const getProductsBySearch = async (req, res) => {
           $or: [
             { $text: { $search: text } },
             { sub_category: { $in: [text] } },
+            { "city.name": { $regex: new RegExp(text, "i") } },
+            { "city.districts": { $regex: new RegExp(text, "i") } },
           ],
         },
         { score: { $meta: "textScore" } }
