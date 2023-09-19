@@ -2,24 +2,32 @@ const mongoose = require("mongoose");
 
 const ordersSchema = new mongoose.Schema(
   {
-    customerName: {
-      type: String,
-      required: true,
+    customerInfo: {
+      id: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      email: {
+        type: String,
+      },
+      number: {
+        type: String,
+      },
+      address: {
+        type: String,
+      },
+    },
+    BDT: {
+      type: Number,
+      default: 0,
     },
     transactionId: {
       type: String,
       required: true,
     },
     paymentMethod: {
-      type: String,
-      required: true,
-    },
-
-    customerId: {
-      type: String,
-      required: true,
-    },
-    customerEmail: {
       type: String,
       required: true,
     },
@@ -43,7 +51,6 @@ const ordersSchema = new mongoose.Schema(
       type: Number,
       default: 1,
     },
-
     price: {
       type: Number,
       required: true,
