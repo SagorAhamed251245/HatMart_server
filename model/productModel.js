@@ -30,10 +30,12 @@ const productSchema = new mongoose.Schema(
       name: {
         type: "String",
         default: "Location is not available",
+        index: true
       },
       districts: {
-        type: ["String"],
-        default: [],
+        type: "String",
+        default: "Districts is not available",
+        index: true
       },
     },
     price: {
@@ -105,7 +107,8 @@ const productSchema = new mongoose.Schema(
 productSchema.index({
   title: "text",
   category: "text",
-  sub_category: "text", // Changed 'multi' to 'name'
+  sub_category: "text", 
+  
 });
 
 module.exports = mongoose.model("Product", productSchema);

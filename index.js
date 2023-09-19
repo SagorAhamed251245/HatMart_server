@@ -8,6 +8,7 @@ const transactionRoutes = require("./routes/transactionRoutes.js");
 const cartPaymentRoutes = require("./routes/StripRoutes.js");
 const wishListRoutes = require("./routes/wishListRoutes.js");
 const couponRoutes = require("./routes/couponRoutes.js");
+const userIPRoutes = require("./routes/userTrafficRoutes.js");
 
 const express = require("express");
 const app = express();
@@ -41,6 +42,7 @@ app.use("/api/v1/auth", transactionRoutes);
 app.use("/api/v1/auth", cartPaymentRoutes);
 app.use("/api/v1/auth", wishListRoutes);
 app.use("/api/v1/auth", couponRoutes);
+app.use("/api/v1/auth", userIPRoutes );
 
 // server listen
 const PORT = process.env.PORT || 5000;
