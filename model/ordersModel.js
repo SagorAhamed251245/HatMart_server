@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 
 const ordersSchema = new mongoose.Schema(
   {
+    customerId: {
+      type: Number,
+      required: true,
+    },
     customerInfo: {
-      id: {
-        type: String,
-      },
       name: {
         type: String,
       },
