@@ -13,6 +13,19 @@ const addCoupon = async (req, res) => {
     res.status(500).send("An error occurred while adding the coupon.");
   }
 };
+const addExpiredCoupon = async (req, res) => {
+  try {
+    const coupon = await couponModel(req.body).save();
+    res.status(201).send({
+      success: true,
+      message: "new expired Coupon created",
+      coupon,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while adding the expired coupon.");
+  }
+};
 
 const getCoupon = async (req, res) => {
   try {
@@ -77,4 +90,5 @@ module.exports = {
   getCoupon,
   deleteCoupon,
   updateCoupon,
+  addExpiredCoupon
 };
