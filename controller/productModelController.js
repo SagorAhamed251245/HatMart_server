@@ -96,6 +96,20 @@ const updateProduct = async (req, res) => {
     res.status(500).send("An error occurred while updated the product.");
   }
 };
+const deleteProduct = async (req, res) => {
+  try {
+    const query = req.params.id;
+    const updatedProduct = await productModel.deleteOne({ _id: query });
+    res.status(201).send({
+      success: true,
+      message: "product deleted successfully",
+      updatedProduct,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while deleting the product.");
+  }
+};
 module.exports = {
   addProduct,
   getAllProducts,
@@ -103,4 +117,5 @@ module.exports = {
   getProductById,
   addMultiProduct,
   updateProduct,
+  deleteProduct
 };
