@@ -1,45 +1,17 @@
 const mongoose = require("mongoose");
 const usersModel = require("../model/usersModel.js");
-const jwt = require("jsonwebtoken");
-const cookie = require("cookie");
 
 // create a users
 const createUser = async (req, res) => {
   console.log(req.body);
 
-  const { email, name, password } = req.body;
+  const { email } = req.body;
 
   let user = await usersModel.findOne({ email });
   if (!user) {
     user = await new usersModel(req.body).save();
   }
   console.log(user._id);
-  // Create a JWT token with the "role" claim
-  const token = jwt.sign(
-    { _id: user._id, role: user.role },
-    process.env.JWT_KEY,
-    {
-      expiresIn: "1h",
-    }
-  );
-
-  const jwtCookie = cookie.serialize("jwtToken", token, {
-    httpOnly: true,
-    maxAge: 360000,
-    sameSite: "strict",
-  });
-
-  res.setHeader("Set-Cookie", jwtCookie);
-  res.status(200).send({
-    success: true,
-    message: "Loging successfully",
-    user: {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      password: user.password,
-    },
-  });
 };
 
 // get all users
